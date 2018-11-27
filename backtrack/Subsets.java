@@ -34,7 +34,9 @@ public class Subsets {
 
     // solution 1 general DFS
     // 1、递归的定义
-    // 在 nums 中找到所有以 prefix 开头的集合，并放到 res 中
+    // 在 nums[start]...nums[end] 中找到所有以 prefix 开头的集合，并放到 res 中
+    // 例如，以 2 开头的，只需从 3。。。n 中找后续候选元素，不需要找 1 作为后续，
+    // 因为 【1,2,...】已经作为以 1 开头的的子集了
     private void helper(int[] nums, int start, List<Integer> prefix, List<List<Integer>> res) {
 
         // 2. 递归的拆解

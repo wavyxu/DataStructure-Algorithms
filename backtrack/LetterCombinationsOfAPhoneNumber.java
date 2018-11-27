@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class LetterCombinationsOfAPhoneNumber {
 
-// solution 1 dfs recursive
+    // solution 1 dfs recursive
     public List<String> letterCombinations(String digits) {
         List<String> res = new ArrayList<>();
         if (digits == null || digits.length() == 0) {
@@ -24,20 +24,22 @@ public class LetterCombinationsOfAPhoneNumber {
         }
 
         String[] map = new String[] {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        String prefix = new String("");
+        StringBuilder prefix = new StringBuilder();
         helper(digits, map, 0, prefix, res);
         return res;
 
     }
 
-    private void helper(String digits, String[] map, int start, String prefix, List<String> res) {
-        if (start == digits.length()) {
-            res.add(new String(prefix));
+    private void helper(String digits, String[] map, int index, StringBuilder prefix, List<String> res) {
+        if (index == digits.length()) {
+            res.add(prefix.toString());
             return;
         }
-        int index = digits.charAt(start) - '0';
-        for (int i = 0; i < map[index].length(); i++) {
-            helper(digits, map, start + 1, prefix + map[index].charAt(i), res);
+        int currIndex = digits.charAt(index) - '0';
+        for (int i = 0; i < map[currIndex].length(); i++) {
+            prefix.append(map[currIndex].charAt(i));
+            helper(digits, map, index + 1, prefix, res);
+            prefix.deleteCharAt(prefix.length() - 1);
         }
     }
 
@@ -48,9 +50,9 @@ public class LetterCombinationsOfAPhoneNumber {
             return res;
         }
         String[] map = new String[] {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        //Deque<String> queue = new ArrayDeque<>();
+        //Deque<string> queue = new ArrayDeque<>();
 
-        //queue.addFirst(new String (""));
+        //queue.addFirst(new string (""));
 
         res.add(new String(""));
 
