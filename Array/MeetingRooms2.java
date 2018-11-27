@@ -56,4 +56,31 @@ public class MeetingRooms2 {
         }
         return res;
     }
+
+    // use lambda expression
+    public int minMeetingRooms2(Interval[] intervals) {
+        List<Point> meetings = new ArrayList<>();
+
+        for (Interval interval : intervals)  {
+            meetings.add(new Point(interval.start, 1));
+            meetings.add(new Point(interval.end, -1));
+        }
+
+        meetings.sort((a, b) -> {
+            if (a.time == b.time) {
+                return a.flag - b.flag;
+            } else {
+                return a.time - b.time;
+            }
+        });
+
+        int res = 0;
+        int curr = 0;
+        for (Point meeting : meetings) {
+            curr += meeting.flag;
+            res = curr > res ? curr : res;
+        }
+
+        return res;
+    }
 }
